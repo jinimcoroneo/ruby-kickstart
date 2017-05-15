@@ -10,8 +10,8 @@
 
 def arithmetic2(a, b)
   if a < b
-    return (a.to_f/2)
+    (a.to_f)/2
   else
-    return (b.to_f/2)
+    (b.to_f)/2
   end
 end
