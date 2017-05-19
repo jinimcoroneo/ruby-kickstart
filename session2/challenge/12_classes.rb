@@ -21,8 +21,42 @@
 # f.to_f               # => 0.5
 
 class Fraction
+
+  attr_accessor :numerator, :denominator
+
+  def initialize(numerator, denominator)
+    @numerator = numerator
+    @denominator = denominator
+  end
+
+  def to_s
+    "#{@numerator}/#{@denominator}"
+  end
+
+  def to_f
+    @numerator / @denominator.to_f
+  end
+
+  def lowest
+    x = gcd(numerator, denominator)
+    Fraction.new(@numerator/x, @denominator/x)
+  end
+
+  def divisors_of(x)
+   divisors = (1..x).select { |n| x % n == 0}
+  end
+
   def gcd(a,b)
     return a if b == 0
-    gcd(b, a%b)
+    array1 = divisors_of(a)
+    array2 = divisors_of(b)
+    new_array = []
+    array1.map do |x|
+      if array2.include?(x) == true
+        new_array << x
+      end
+    end
+    gcd = new_array.sort.reverse[0]
   end
+
 end
